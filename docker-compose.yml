@@ -1,0 +1,104 @@
+services:
+  r-master:
+    image: "redis/redis-stack-server:latest"
+    container_name: "cr-master"
+    hostname: "master"
+    entrypoint: ./entrypoint.sh
+    restart: unless-stopped
+    #    command:
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - "r-master-d:/data"
+      - "./conf/master/:/etc/redis/conf.d/:ro"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
+    ports:
+      # Redis Port
+      - "17001:7001"
+      - "17002:7002"
+      - "17003:7003"
+    tty: true
+    stdin_open: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+        max-file: "5"
+    networks:
+      rc-net:
+        ipv4_address: 172.20.0.10
+
+  r-node1:
+    image: "redis/redis-stack-server:latest"
+    container_name: "cr-node1"
+    hostname: "node1"
+    entrypoint: ./entrypoint.sh
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - "r-node1-d:/data"
+      - "./conf/node1/:/etc/redis/conf.d/:ro"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
+    ports:
+     # Redis Port
+     - "27001:7001"
+     - "27002:7002"
+     - "27003:7003"
+    tty: true
+    stdin_open: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+        max-file: "5"
+    networks:
+      rc-net:
+        ipv4_address: 172.20.0.11
+
+  r-node2:
+    image: "redis/redis-stack-server:latest"
+    container_name: "cr-node2"
+    hostname: "node2"
+    entrypoint: ./entrypoint.sh
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Shanghai
+    volumes:
+      - "r-node2-d:/data"
+      - "./conf/node2/:/etc/redis/conf.d/:ro"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
+    ports:
+     # Redis Port
+     - "37001:7001"
+     - "37002:7002"
+     - "37003:7003"
+    tty: true
+    stdin_open: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1G"
+        max-file: "5"
+    networks:
+      rc-net:
+        ipv4_address: 172.20.0.12
+
+networks:
+  rc-net:
+    name: redis-cluster-net
+    driver: bridge
+    enable_ipv6: false
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+          gateway: 172.20.0.1
+
+volumes:
+  r-master-d:
+  r-node1-d:
+  r-node2-d:

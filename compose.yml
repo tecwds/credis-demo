@@ -1,7 +1,0 @@
-services:
-  r-master:
-    image: 'redis:latest'
-  r-node1:
-    image: 'redis:latest'
-  r-node2:
-    image: 'redis:latest'
