@@ -91,12 +91,7 @@ networks:
       driver: default
       config:
         - subnet: 172.20.0.0/24
-          ip_range: 172.20.0.0/24
           gateway: 172.20.0.1
-          aux_addresses:
-            master: 172.20.0.10
-            node1: 172.20.0.11
-            node2: 172.20.0.12
 
 volumes:
   r-master-d:
