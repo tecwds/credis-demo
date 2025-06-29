@@ -31,7 +31,7 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - "r-master-d:/data"
-      - "./conf/:/etc/redis/conf.d/:ro"
+      - "./conf/master/:/etc/redis/conf.d/:ro"
       - "./entrypoint.sh:/entrypoint.sh:ro"
       - "./set_cluster.sh:/set_cluster.sh:ro"
     ports:
@@ -60,7 +60,7 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - "r-node1-d:/data"
-      - "./conf/:/etc/redis/conf.d/:ro"
+      - "./conf/node1/:/etc/redis/conf.d/:ro"
       - "./entrypoint.sh:/entrypoint.sh:ro"
       - "./set_cluster.sh:/set_cluster.sh:ro"
 #    ports:
@@ -89,7 +89,7 @@ services:
       TZ: Asia/Shanghai
     volumes:
       - "r-node2-d:/data"
-      - "./conf/:/etc/redis/conf.d/:ro"
+      - "./conf/node2/:/etc/redis/conf.d/:ro"
       - "./entrypoint.sh:/entrypoint.sh:ro"
       - "./set_cluster.sh:/set_cluster.sh:ro"
     tty: true
