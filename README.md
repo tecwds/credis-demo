@@ -21,9 +21,9 @@ credis-demo/
 - **3 个 Docker 容器**：cr-master, cr-node1, cr-node2
 - **9 个 Redis 实例**：每个容器运行 3 个 Redis 实例（端口 7001, 7002, 7003）
 - **网络配置**：使用自定义网络 `redis-cluster-net`
-  - cr-master: 192.168.100.10
-  - cr-node1: 192.168.100.11
-  - cr-node2: 192.168.100.12
+  - cr-master: 172.20.0.10
+  - cr-node1: 172.20.0.11
+  - cr-node2: 172.20.0.12
 
 ## 快速开始
 
@@ -48,7 +48,7 @@ docker-compose ps
 
 ```bash
 # 连接到集群
-docker exec -it cr-master redis-cli -a course_redis -c -h 192.168.100.10 -p 7001
+docker exec -it cr-master redis-cli -a course_redis -c -h 172.20.0.10 -p 7001
 
 # 或者从宿主机连接（需要安装 redis-cli）
 redis-cli -a course_redis -c -h localhost -p 7001
@@ -60,27 +60,27 @@ redis-cli -a course_redis -c -h localhost -p 7001
 
 ```bash
 # 查看集群节点信息
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 cluster nodes
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 cluster nodes
 
 # 查看集群信息
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 cluster info
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 cluster info
 
 # 查看集群槽位分配
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 cluster slots
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 cluster slots
 ```
 
 ### 数据操作测试
 
 ```bash
 # 设置键值对（会自动路由到正确的节点）
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 set key1 "value1"
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 set key2 "value2"
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 set key3 "value3"
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 set key1 "value1"
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 set key2 "value2"
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 set key3 "value3"
 
 # 获取键值对
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 get key1
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 get key2
-redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 get key3
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 get key1
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 get key2
+redis-cli -a course_redis -c -h 172.20.0.10 -p 7001 get key3
 ```
 
 ## 配置说明
@@ -94,9 +94,9 @@ redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 get key3
 
 ### 网络配置
 
-- **子网**：192.168.100.0/24
-- **IP 范围**：192.168.100.0/24
-- **网关**：192.168.100.1
+- **子网**：172.20.0.0/24
+- **IP 范围**：172.20.0.0/24
+- **网关**：172.20.0.1
 
 ## 故障排除
 
