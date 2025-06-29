@@ -15,9 +15,9 @@ services:
       - "./set_cluster.sh:/set_cluster.sh:ro"
     ports:
       # Redis Port
-      - "7001:7001"
-      - "7002:7002"
-      - "7003:7003"
+      - "17001:7001"
+      - "17002:7002"
+      - "17003:7003"
     tty: true
     stdin_open: true
     logging:
@@ -42,11 +42,11 @@ services:
       - "./conf/node1/:/etc/redis/conf.d/:ro"
       - "./entrypoint.sh:/entrypoint.sh:ro"
       - "./set_cluster.sh:/set_cluster.sh:ro"
-#    ports:
-#      # Redis Port
-#      - "7001:7001"
-#      - "7002:7002"
-#      - "7003:7003"
+    ports:
+     # Redis Port
+     - "27001:7001"
+     - "27002:7002"
+     - "27003:7003"
     tty: true
     stdin_open: true
     logging:
@@ -71,6 +71,11 @@ services:
       - "./conf/node2/:/etc/redis/conf.d/:ro"
       - "./entrypoint.sh:/entrypoint.sh:ro"
       - "./set_cluster.sh:/set_cluster.sh:ro"
+    ports:
+     # Redis Port
+     - "37001:7001"
+     - "37002:7002"
+     - "37003:7003"
     tty: true
     stdin_open: true
     logging:
