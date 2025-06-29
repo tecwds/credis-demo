@@ -53,7 +53,7 @@ status:
 	docker compose ps
 	@echo ""
 	@echo "Cluster Info:"
-	@docker exec cr-master redis-cli -a course_redis -c -h 10.0.9.10 -p 7001 cluster info 2>/dev/null || echo "Cluster not initialized yet"
+	@docker exec cr-master redis-cli -a course_redis -c -h 192.168.100.10 -p 7001 cluster info 2>/dev/null || echo "Cluster not initialized yet"
 
 # 查看日志
 logs:
@@ -64,7 +64,7 @@ logs:
 connect:
 	@echo "Connecting to Redis cluster..."
 	@echo "Use 'exit' to disconnect"
-	docker exec -it cr-master redis-cli -a course_redis -c -h 10.0.9.10 -p 7001
+	docker exec -it cr-master redis-cli -a course_redis -c -h 192.168.100.10 -p 7001
 
 # 清理所有资源
 clean:

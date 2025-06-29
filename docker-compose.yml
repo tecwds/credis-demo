@@ -6,13 +6,13 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 10.0.0.0/16
-          ip_range: 10.0.9.0/24
-          gateway: 10.0.9.1
+        - subnet: 192.168.100.0/24
+          ip_range: 192.168.100.0/24
+          gateway: 192.168.100.1
           aux_addresses:
-            master: 10.0.9.10
-            node1: 10.0.9.11
-            node2: 10.0.9.12
+            master: 192.168.100.10
+            node1: 192.168.100.11
+            node2: 192.168.100.12
 
 volumes:
   r-master-d:
@@ -48,7 +48,7 @@ services:
         max-file: "5"
     networks:
       rc-net:
-        ipv4_address: 10.0.9.10
+        ipv4_address: 192.168.100.10
 
   r-node1:
     image: "redis/redis-stack-server:latest"
@@ -77,7 +77,7 @@ services:
         max-file: "5"
     networks:
       rc-net:
-        ipv4_address: 10.0.9.11
+        ipv4_address: 192.168.100.11
 
   r-node2:
     image: "redis/redis-stack-server:latest"
@@ -101,4 +101,4 @@ services:
         max-file: "5"
     networks:
       rc-net:
-        ipv4_address: 10.0.9.12
+        ipv4_address: 192.168.100.12
