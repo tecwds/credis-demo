@@ -1,1 +1,30 @@
+# IDE
 .idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker
+
+# Logs
+*.log
+logs/
+
+# Redis
+*.rdb
+*.aof
+nodes_*.conf
+dump.rdb
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment variables (if containing sensitive data)
+# .env

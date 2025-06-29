@@ -25,7 +25,6 @@ services:
     container_name: "cr-master"
     hostname: "master"
     entrypoint: ./entrypoint.sh
-    command: "top -b"
     restart: unless-stopped
     #    command:
     environment:
@@ -33,6 +32,8 @@ services:
     volumes:
       - "r-master-d:/data"
       - "./conf/:/etc/redis/conf.d/:ro"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
     ports:
       # Redis Port
       - "7001:7001"
@@ -54,14 +55,14 @@ services:
     container_name: "cr-node1"
     hostname: "node1"
     entrypoint: ./entrypoint.sh
-    command: "top -b"
     restart: unless-stopped
-    #    command:
     environment:
       TZ: Asia/Shanghai
     volumes:
       - "r-node1-d:/data"
       - "./conf/:/etc/redis/conf.d/:ro"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
 #    ports:
 #      # Redis Port
 #      - "7001:7001"
@@ -83,19 +84,14 @@ services:
     container_name: "cr-node2"
     hostname: "node2"
     entrypoint: ./entrypoint.sh
-    command: "top -b"
     restart: unless-stopped
-    #    command:
     environment:
       TZ: Asia/Shanghai
     volumes:
       - "r-node2-d:/data"
       - "./conf/:/etc/redis/conf.d/:ro"
-#    ports:
-#      # Redis Port
-#      - "7001:7001"
-#      - "7002:7002"
-#      - "7003:7003"
+      - "./entrypoint.sh:/entrypoint.sh:ro"
+      - "./set_cluster.sh:/set_cluster.sh:ro"
     tty: true
     stdin_open: true
     logging:
