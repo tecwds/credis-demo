@@ -19,7 +19,7 @@ help:
 # 启动集群
 up:
 	@echo "Starting Redis cluster..."
-	docker-compose up -d
+	docker compose up -d
 	@echo "Waiting for containers to be ready..."
 	sleep 10
 	@echo "Cluster containers started!"
@@ -27,7 +27,7 @@ up:
 # 停止集群
 down:
 	@echo "Stopping Redis cluster..."
-	docker-compose down
+	docker compose down
 
 # 重启集群
 restart: down up
@@ -50,7 +50,7 @@ test:
 status:
 	@echo "Redis Cluster Status:"
 	@echo "====================="
-	docker-compose ps
+	docker compose ps
 	@echo ""
 	@echo "Cluster Info:"
 	@docker exec cr-master redis-cli -a course_redis -c -h 10.0.9.10 -p 7001 cluster info 2>/dev/null || echo "Cluster not initialized yet"
@@ -58,7 +58,7 @@ status:
 # 查看日志
 logs:
 	@echo "Container logs:"
-	docker-compose logs --tail=50
+	docker compose logs --tail=50
 
 # 连接到集群
 connect:
@@ -69,7 +69,7 @@ connect:
 # 清理所有资源
 clean:
 	@echo "Cleaning up Redis cluster..."
-	docker-compose down -v
+	docker compose down -v
 	docker system prune -f
 	@echo "Cleanup complete!"
 
